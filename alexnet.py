@@ -2,7 +2,7 @@ import numpy as np
 import tensorflow as tf
 
 net_data = np.load("bvlc-alexnet.npy", encoding="latin1").item()
-
+#print(net_data)
 
 def conv(input, kernel, biases, k_h, k_w, c_o, s_h, s_w,  padding="VALID", group=1):
     '''
@@ -158,10 +158,10 @@ def AlexNet(features, feature_extract=False):
         return fc7
 
     # fc8, 1000
-    # fc8W = tf.Variable(net_data["fc8"][0])
-    # fc8b = tf.Variable(net_data["fc8"][1])
+    fc8W = tf.Variable(net_data["fc8"][0])
+    fc8b = tf.Variable(net_data["fc8"][1])
 
-    # logits = tf.matmul(fc7, fc8W) + fc8b
-    # probabilities = tf.nn.softmax(logits)
+    logits = tf.matmul(fc7, fc8W) + fc8b
+    probabilities = tf.nn.softmax(logits)
 
-    # return probabilities
+    return probabilities
